@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Labor Rural – MIPD Café Conilon</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{--bg:#F2F4F0;--s:#fff;--s2:#EAF0E5;--b:#CFDBC8;--g:#4A8E2A;--g2:#3A7020;--g3:#E8F4DF;--bl:#1A4F8A;--w:#C85A08;--r:#B82E1A;--text:#1C2518;--t2:#536048;--t3:#8A9E80}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column}
+#app{display:flex;flex-direction:column;height:100%}
+#content{flex:1;overflow-y:auto;padding-bottom:4px}
+/* HOME NAV BUTTONS */
+.home-nav{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+.home-nav-btn{display:flex;flex-direction:row;align-items:center;gap:14px;padding:15px 16px;background:var(--s);border:1.5px solid var(--b);border-radius:12px;cursor:pointer;font-family:inherit;box-shadow:0 1px 4px rgba(0,0,0,.06);transition:all .15s;width:100%;text-align:left}
+.home-nav-btn:active{background:var(--g3);border-color:var(--g);transform:scale(.98)}
+.home-nav-btn .hni{font-size:24px;line-height:1;flex-shrink:0}
+.home-nav-btn .hnl{font-size:13px;font-weight:700;color:var(--text)}
+.home-nav-btn .hns{font-size:10px;color:var(--t2);font-weight:500;line-height:1.4}
+/* VIEWS */
+.vw{display:none;padding:13px}.vw.on{display:block}
+#v-home{display:none;padding:0;flex-direction:column}
+#v-home.on{display:flex}
+/* HOME */
+.hero{background:var(--g2);padding:28px 20px 24px;text-align:center;flex-shrink:0}
+.hero-ic{width:60px;height:60px;background:rgba(255,255,255,.18);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 12px;border:1.5px solid rgba(255,255,255,.22)}
+.hero-brand{font-size:20px;font-weight:800;color:#fff}
+.hero-sub{font-size:10.5px;color:rgba(255,255,255,.72);font-weight:500;margin-top:4px;line-height:1.5}
+.home-body{padding:16px 14px;flex:1;overflow-y:auto}
+.home-desc{font-size:12px;color:var(--t2);line-height:1.7;font-weight:500;margin-bottom:14px;text-align:center}
+.hc{background:var(--s);border:1px solid var(--b);border-radius:11px;padding:14px;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.hc-t{font-size:10px;font-weight:700;color:var(--g2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:7px}
+.hc-b{font-size:12px;color:var(--t2);line-height:1.6;font-weight:500}
+.hc-link{display:flex;justify-content:center;margin-top:14px;margin-bottom:6px}
+.hc-link a{display:inline-flex;align-items:center;gap:6px;background:var(--g);color:#fff;padding:11px 22px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;box-shadow:0 2px 8px rgba(74,142,42,.3)}
+/* CARD */
+.card{background:var(--s);border:1px solid var(--b);border-radius:11px;padding:12px;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.ct{font-size:9.5px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+/* FORM */
+label{font-size:11px;color:var(--t2);display:block;margin:8px 0 3px;font-weight:600}
+input,select,textarea{width:100%;padding:8px 10px;background:var(--bg);border:1.5px solid var(--b);border-radius:7px;color:var(--text);font-size:12px;font-family:inherit;outline:none;-webkit-appearance:none;font-weight:500}
+input:focus,select:focus,textarea:focus{border-color:var(--g);background:#fff}
+textarea{resize:vertical;min-height:52px}
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:9px 14px;border-radius:7px;border:none;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}
+.btn:active{opacity:.8}
+.bg2{background:var(--g);color:#fff;box-shadow:0 2px 6px rgba(74,142,42,.22)}
+.bs2{background:var(--s2);color:var(--text);border:1.5px solid var(--b)}
+.br2{background:var(--r);color:#fff}
+.bfw{width:100%;margin-top:9px}
+/* STATS */
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.sc{background:var(--s);border:1px solid var(--b);border-radius:11px;padding:11px 12px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.sv{font-size:22px;font-weight:800}.sl{font-size:10px;color:var(--t2);margin-top:1px;font-weight:500}
+/* BADGES */
+.bdg{display:inline-block;padding:2px 7px;border-radius:20px;font-size:9.5px;font-weight:700}
+.bk{background:var(--g3);color:var(--g2);border:1px solid var(--g)}
+.bwa{background:rgba(200,90,8,.10);color:var(--w);border:1px solid var(--w)}
+.brd{background:rgba(184,46,26,.10);color:var(--r);border:1px solid var(--r)}
+.bi{background:rgba(26,79,138,.10);color:var(--bl);border:1px solid var(--bl)}
+/* PRAGA SECTION */
+.psec{background:var(--s);border:1px solid var(--b);border-radius:11px;margin-bottom:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.phdr{padding:11px 12px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none}
+.phdr.open{background:var(--g3);border-bottom:1px solid rgba(74,142,42,.2)}
+.phdr-l{display:flex;align-items:center;gap:8px}
+.pic{font-size:20px}
+.pnm{font-size:12px;font-weight:700;color:var(--text)}
+.ptp{font-size:10px;color:var(--t3);font-weight:500;margin-top:1px}
+.pbdy{display:none;padding:12px}
+.pbdy.open{display:block}
+/* PROTOCOL INFO */
+.proto-info{background:var(--s2);border:1px solid var(--b);border-radius:7px;padding:7px 10px;font-size:10px;color:var(--t2);font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+/* PLANT GRID */
+.pgrid{display:grid;gap:7px;margin-bottom:10px}
+.prow{background:var(--bg);border:1px solid var(--b);border-radius:8px;padding:9px 10px}
+.prow-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}
+.plbl{font-size:10px;font-weight:700;color:var(--t2);background:var(--s2);padding:2px 8px;border-radius:5px}
+.ppct{font-size:10px;font-weight:700;color:var(--g)}
+/* COUNT INPUT */
+.cnt-row{display:flex;align-items:center;gap:8px}
+.cnt-lbl{font-size:11px;color:var(--t2);font-weight:600;flex:1}
+.cnt-ctrl{display:flex;align-items:center;gap:0}
+.cnt-btn{width:30px;height:30px;border:1.5px solid var(--b);background:var(--s);color:var(--text);font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;border-radius:0}
+.cnt-btn:first-child{border-radius:6px 0 0 6px}
+.cnt-btn:last-child{border-radius:0 6px 6px 0}
+.cnt-btn:active{background:var(--s2)}
+.cnt-inp{width:44px;height:30px;border:1.5px solid var(--b);border-left:none;border-right:none;border-radius:0;background:var(--s);text-align:center;font-size:14px;font-weight:700;color:var(--text);font-family:inherit;padding:0;margin:0;-webkit-appearance:none;appearance:none}
+.cnt-inp::-webkit-outer-spin-button,.cnt-inp::-webkit-inner-spin-button{-webkit-appearance:none}
+.cnt-inp:focus{outline:none;background:#fff;border-color:var(--g)}
+/* SEV BUTTONS */
+.sev-row{display:flex;gap:5px;margin-top:4px}
+.sev-btn{flex:1;padding:7px 3px;border-radius:6px;border:1.5px solid var(--b);background:var(--bg);color:var(--t2);font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;text-align:center}
+.sev-btn.on-ok{border-color:var(--g);background:var(--g3);color:var(--g2)}
+.sev-btn.on-at{border-color:var(--w);background:rgba(200,90,8,.09);color:var(--w)}
+.sev-btn.on-ct{border-color:var(--r);background:rgba(184,46,26,.09);color:var(--r)}
+/* PRES BUTTONS */
+.pres-row{display:flex;gap:6px}
+.pres-btn{flex:1;padding:8px;border-radius:7px;border:1.5px solid var(--b);background:var(--bg);color:var(--t2);font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;text-align:center}
+.pres-btn.on-aus{border-color:var(--g);background:var(--g3);color:var(--g2)}
+.pres-btn.on-pre{border-color:var(--r);background:rgba(184,46,26,.09);color:var(--r)}
+/* RESULTADO */
+.res-box{padding:10px 12px;border-radius:8px;font-size:12px;font-weight:600;line-height:1.5;margin-top:6px}
+.res-nd{background:var(--bg);border:1.5px solid var(--b);color:var(--t3)}
+.res-ok{background:var(--g3);border:1.5px solid rgba(74,142,42,.25);color:var(--g2)}
+.res-at{background:rgba(200,90,8,.08);border:1.5px solid rgba(200,90,8,.25);color:var(--w)}
+.res-ct{background:rgba(184,46,26,.08);border:1.5px solid rgba(184,46,26,.25);color:var(--r)}
+.res-media{font-size:9.5px;font-weight:600;opacity:.75;margin-top:3px}
+/* HIST */
+.hi{background:var(--s);border:1.5px solid var(--b);border-radius:11px;padding:11px;margin-bottom:8px;cursor:pointer}
+.hi:active{background:var(--s2)}
+.ht{display:flex;justify-content:space-between;margin-bottom:5px}
+.hn{font-size:12px;font-weight:700}.hd{font-size:9.5px;color:var(--t3);font-weight:600}
+.tgs{display:flex;flex-wrap:wrap;gap:3px}
+/* TOPBAR */
+.topbar{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--b)}
+.back-btn{display:inline-flex;align-items:center;gap:4px;padding:6px 12px;background:var(--s2);border:1.5px solid var(--b);border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;color:var(--text)}
+.back-btn:active{background:var(--g3);border-color:var(--g)}
+.topbar-title{font-size:13px;font-weight:700;color:var(--text)}
+.pi2{background:var(--s2);border:1px solid var(--b);border-radius:9px;padding:10px;margin-bottom:7px}
+.pnm2{font-size:12px;font-weight:700;margin-bottom:3px}
+.pia{font-size:10px;color:var(--t2);margin-bottom:4px;font-weight:500}
+.pds{font-size:10px;color:var(--g2);background:rgba(74,142,42,.1);padding:2px 7px;border-radius:4px;font-weight:700;border:1px solid rgba(74,142,42,.2);display:inline-block}
+.pkr{font-size:9.5px;color:var(--t3);margin-top:4px;font-weight:600}
+/* MODAL */
+.ov{display:none;position:fixed;inset:0;background:rgba(28,37,24,.5);z-index:200;align-items:flex-end}
+.ov.on{display:flex}
+.mb{background:var(--s);border-radius:16px 16px 0 0;padding:16px 13px 28px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:0 -4px 20px rgba(0,0,0,.12)}
+.mh{width:34px;height:3px;background:var(--b);border-radius:2px;margin:0 auto 13px}
+.mt2{font-size:14px;font-weight:700;margin-bottom:12px}
+/* MISC */
+.emp{text-align:center;padding:22px 12px;color:var(--t3)}
+.ei{font-size:24px;display:block;margin-bottom:6px}
+.emp p{font-size:12px;font-weight:500}
+.sep{height:1px;background:var(--b);margin:10px 0}
+.ib2{margin-top:5px;padding:6px 9px;background:var(--s2);border:1px solid var(--b);border-radius:7px;font-size:10px;color:var(--t2);font-weight:500}
+.r2{display:flex;gap:7px}.r2>div{flex:1}
+.ci{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--b)}
+.fg{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:7px}
+.ft{aspect-ratio:1;border-radius:6px;overflow:hidden;position:relative;border:1px solid var(--b)}
+.ft img{width:100%;height:100%;object-fit:cover}
+.fd{position:absolute;top:2px;right:2px;background:rgba(184,46,26,.9);border:none;border-radius:50%;width:17px;height:17px;color:#fff;font-size:9px;cursor:pointer;font-weight:700}
+.toast{position:fixed;bottom:76px;left:50%;transform:translateX(-50%) translateY(18px);background:var(--g2);color:#fff;padding:9px 16px;border-radius:28px;font-size:11px;font-weight:600;z-index:300;opacity:0;transition:all .28s;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.2);pointer-events:none}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div id="app">
+<div id="content">
+
+<!-- HOME -->
+<div id="v-home" class="on">
+  <div class="hero">
+    <div class="hero-ic">🌿</div>
+    <div class="hero-brand">Labor Rural</div>
+    <div class="hero-sub">Inteligência para o Agronegócio<br>MIPD – Manejo Integrado · Café Conilon</div>
+  </div>
+  <div class="home-body">
+    <p class="home-desc">Ferramenta de campo para monitoramento fitossanitário com tomada de decisão baseada em Níveis de Ação por amostragem individual de plantas.</p>
+
+    <!-- MENU BUTTONS -->
+    <div class="home-nav">
+      <button class="home-nav-btn" onclick="goHome('cad')">
+        <span class="hni">📋</span>
+        <div><div class="hnl">Cadastro</div><div class="hns">Fazendas e talhões</div></div>
+      </button>
+      <button class="home-nav-btn" onclick="goHome('aval')">
+        <span class="hni">🔍</span>
+        <div><div class="hnl">Avaliação</div><div class="hns">MIPD a campo</div></div>
+      </button>
+      <button class="home-nav-btn" onclick="goHome('hist')">
+        <span class="hni">🗂️</span>
+        <div><div class="hnl">Histórico</div><div class="hns">Avaliações salvas</div></div>
+      </button>
+      <button class="home-nav-btn" onclick="goHome('prod')">
+        <span class="hni">🧪</span>
+        <div><div class="hnl">Produtos</div><div class="hns">Defensivos registrados</div></div>
+      </button>
+      <a href="https://laborrural.com" target="_blank" class="home-nav-btn" style="text-decoration:none">
+        <span class="hni">🌐</span>
+        <div><div class="hnl">Conheça a Labor Rural</div><div class="hns">laborrural.com</div></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- CADASTRO -->
+<div id="v-cad" class="vw">
+  <div class="topbar"><button class="back-btn" onclick="voltarHome()">← Início</button><span class="topbar-title">📋 Cadastro</span></div>
+  <div class="card">
+    <div class="ct">🏡 Fazendas</div>
+    <label>Nome da Fazenda *</label><input id="cfn" placeholder="Ex: Fazenda São João">
+    <div class="r2">
+      <div><label>Produtor</label><input id="cfp" placeholder="Nome do produtor"></div>
+      <div><label>Município</label><input id="cfm" placeholder="Ex: Linhares-ES"></div>
+    </div>
+    <button class="btn bg2 bfw" onclick="addFaz()">＋ Cadastrar Fazenda</button>
+    <div class="sep"></div>
+    <div id="lfaz"><div class="emp"><span class="ei">🏡</span><p>Nenhuma fazenda cadastrada.</p></div></div>
+  </div>
+  <div class="card">
+    <div class="ct">🗺️ Talhões</div>
+    <label>Fazenda *</label>
+    <select id="ctf" onchange="rTalCad()"><option value="">Selecione a fazenda...</option></select>
+    <label>Nome do Talhão *</label><input id="ctn" placeholder="Ex: Talhão A1, Gleba Norte">
+    <div class="r2">
+      <div><label>Área (ha)</label><input id="cta" type="number" step="0.1" placeholder="3.5"></div>
+      <div><label>Cultivar</label><input id="ctc" placeholder="BRS Conilon"></div>
+    </div>
+    <div class="r2">
+      <div><label>Ano Plantio</label><input id="ctano" type="number" placeholder="2019"></div>
+      <div><label>Espaçamento</label><input id="cte" placeholder="3x1m"></div>
+    </div>
+    <label>Observação</label><input id="cto" placeholder="Histórico, peculiaridades...">
+    <button class="btn bg2 bfw" onclick="addTal()">＋ Cadastrar Talhão</button>
+    <div class="sep"></div>
+    <div id="ltal"><div class="emp"><span class="ei">🗺️</span><p>Selecione uma fazenda.</p></div></div>
+  </div>
+</div>
+
+<!-- AVALIAÇÃO -->
+<div id="v-aval" class="vw">
+  <div class="topbar"><button class="back-btn" onclick="voltarHome()">← Início</button><span class="topbar-title">🔍 Avaliação</span></div>
+  <div class="card">
+    <div class="ct">Identificação da Área</div>
+    <label>Fazenda *</label>
+    <select id="afaz" onchange="onFaz()"><option value="">Selecione a fazenda...</option></select>
+    <label>Talhão *</label>
+    <select id="atal" onchange="onTal()" disabled><option value="">Selecione o talhão...</option></select>
+    <div id="ati" class="ib2" style="display:none"></div>
+    <label>Data</label><input id="adat" type="date">
+    <label>Estádio Fenológico</label>
+    <select id="aest"><option value="">Selecione...</option><option>Vegetativo</option><option>Floração</option><option>Chumbinho</option><option>Expansão dos frutos</option><option>Maturação</option><option>Pós-colheita</option></select>
+    <label>Observações</label>
+    <textarea id="aobs" placeholder="Condições climáticas, histórico da área, anotações gerais..."></textarea>
+  </div>
+
+  <div id="prg-wrap"></div>
+
+  <div style="display:flex;gap:8px;margin-bottom:10px;align-items:center">
+    <button class="btn bs2" style="flex:1" onclick="add5plantas()">＋ 5 Plantas <span id="nplbl" style="opacity:.6;font-size:10px">(atual: 10)</span></button>
+    <button class="btn bg2" style="flex:1" onclick="salvar()">💾 Salvar</button>
+  </div>
+
+  <div class="card">
+    <div class="ct">📷 Registro Fotográfico</div>
+    <div style="border:2px dashed var(--b);border-radius:9px;padding:14px;text-align:center;cursor:pointer;color:var(--t3);font-size:11px;font-weight:500;background:var(--bg)" onclick="document.getElementById('phin').click()">
+      <div style="font-size:22px;margin-bottom:4px">📷</div>Toque para fotografar
+    </div>
+    <input id="phin" type="file" accept="image/*" multiple style="display:none" onchange="addF(this)">
+    <div class="fg" id="fg"></div>
+  </div>
+  <div style="height:12px"></div>
+</div>
+
+<!-- HISTÓRICO -->
+<div id="v-hist" class="vw">
+  <div class="topbar"><button class="back-btn" onclick="voltarHome()">← Início</button><span class="topbar-title">🗂️ Histórico</span></div>
+  <div class="card" style="padding:7px 9px;margin-bottom:9px">
+    <input id="hbus" placeholder="🔍 Buscar talhão, fazenda ou produtor..." oninput="rHist()">
+  </div>
+  <div id="hlist"><div class="emp"><span class="ei">🗂️</span><p>Nenhuma avaliação salva ainda.</p></div></div>
+</div>
+
+<!-- PRODUTOS -->
+<div id="v-prod" class="vw">
+  <div class="topbar"><button class="back-btn" onclick="voltarHome()">← Início</button><span class="topbar-title">🧪 Produtos</span></div>
+  <div class="card" style="padding:7px 9px;margin-bottom:9px">
+    <select id="pfil" onchange="rProd()"><option value="">Todos os alvos</option></select>
+  </div>
+  <div id="plist"></div>
+</div>
+
+</div><!-- /content -->
+</div><!-- /app -->
+
+<!-- MODAL -->
+<div class="ov" id="mod" onclick="if(event.target===this)fMod()">
+  <div class="mb">
+    <div class="mh"></div>
+    <div class="mt2" id="mtit"></div>
+    <div id="mbod"></div>
+    <button class="btn br2 bfw" id="mdel" style="margin-top:14px">🗑️ Excluir Avaliação</button>
+    <button class="btn bs2 bfw" onclick="fMod()" style="margin-top:7px">Fechar</button>
+  </div>
+</div>
+<div class="toast" id="tst"></div>
+
+<script>
+// ── DADOS PRAGAS ───────────────────────────────────────────────────────────
+// NAs e fontes: Bicho-mineiro 30% (REIS & SOUZA 1996; INCAPER 2017); Broca 3%
+// (EPAMIG Bol.Téc.50; MIP Cafeicultura); Ácaro 20% (Fornazier et al., 2017);
+// Ferrugem 5% e CBD 5% (referência indicativa – programas preventivos são prioritários);
+// Cercosporiose 15% (INCAPER 2017); Cochonilha, Nematoides, Phoma, Lagarta:
+// NA não determinado na literatura (Embrapa Rondônia CT68, 2004).
+const PRAGAS = [
+  {id:'bm',n:'Bicho-mineiro',       t:'Praga', ic:'🪲', m:'cnt', struct:'folhas minadas',    totalFixo:20, na:30,
+   ok:'Abaixo do NA (30%). Monitorar. Verificar rasgaduras nas minas (inimigos naturais).',
+   at:'Próximo ao NA. Intensificar monitoramento. Preservar inimigos naturais antes de agir.',
+   ct:'NA atingido. Inseticida sistêmico registrado. Preferir período seco. (Fonte: REIS & SOUZA 1996; INCAPER 2017)'},
+  {id:'br',n:'Broca-do-café',        t:'Praga', ic:'🐛', m:'cnt', struct:'frutos brocados',    totalFixo:20, na:3,
+   ok:'Abaixo do NA (3%). Higienização eficaz. Manter colheita regular.',
+   at:'Próximo ao NA. Avaliar controle imediato. Inspecionar frutos no chão.',
+   ct:'NA atingido. Beauveria bassiana ou inseticida registrado. Colheita precoce nos focos. (Fonte: EPAMIG Bol.Téc.50)'},
+  {id:'ac',n:'Ácaro-vermelho',       t:'Praga', ic:'🔴', m:'cnt', struct:'folhas com ácaro',   totalFixo:20, na:20,
+   ok:'Abaixo do NA (20%). Monitorar especialmente em veranicos.',
+   at:'Crescente. Verificar ácaros predadores antes de agir.',
+   ct:'NA atingido. Acaricida registrado. Rotar mecanismo de ação. (Fonte: Fornazier et al., 2017)'},
+  {id:'la',n:'Lagarta-dos-cafezais', t:'Praga', ic:'🦋', m:'cnt', struct:'lagartas vivas',     totalFixo:1,  na:null,
+   ok:'Sem lagartas ou ocorrência isolada. Monitorar. Inimigos naturais geralmente controlam.',
+   at:'Lagartas presentes em múltiplas plantas. Avaliar parasitismo natural antes de agir.',
+   ct:'Foco detectado com desfolha. Bacillus thuringiensis ou inseticida registrado. Controlar o foco. (Fonte: Embrapa Rondônia CT68, 2004)'},
+  {id:'co',n:'Cochonilha',           t:'Praga', ic:'🪳', m:'pres', na:20,
+   ok:'Baixa infestação (<20% plantas). Monitorar presença de formigas.',
+   at:'Infestação moderada. Colônias visíveis. Verificar associação com formigas.',
+   ct:'Alta infestação (≥20%). Inseticida sistêmico. Controlar formigas. Verificar raízes. (NA indicativo — não determinado na literatura)'},
+  {id:'ne',n:'Nematoides',           t:'Praga', ic:'〰️', m:'sev',
+   ok:'Severidade baixa (média <2). Manter cobertura vegetal e M.O.',
+   at:'Severidade moderada (média 2–3.4). Amostragem de solo recomendada.',
+   ct:'Severidade alta (média ≥3.5). Confirmar via análise. Nematicida + M.O. + porta-enxerto resistente. (NA não determinado)'},
+  {id:'fe',n:'Ferrugem',             t:'Doença',ic:'🟠', m:'cnt', struct:'folhas com pústulas', totalFixo:20, na:5,
+   ok:'Abaixo do NA indicativo (5%). Manter programa preventivo.',
+   at:'Próximo ao NA. Antecipar fungicida sistêmico.',
+   ct:'NA atingido. Triazol ou estrobilurina urgente. Avaliar cultivar. (Ref. indicativa — programas preventivos são prioritários)'},
+  {id:'ce',n:'Cercosporiose',        t:'Doença',ic:'🍂', m:'cnt', struct:'folhas com mancha',   totalFixo:20, na:15,
+   ok:'Abaixo do NA (15%). Boa nutrição é fator preventivo fundamental.',
+   at:'Crescendo. Revisar adubação potássica e nitrogenada.',
+   ct:'NA atingido. Fungicida protetante + manejo nutricional. (Fonte: INCAPER 2017)'},
+  {id:'cb',n:'CBD (antracnose)',     t:'Doença',ic:'🫐', m:'cnt', struct:'frutos com sintoma',  totalFixo:20, na:5,
+   ok:'Abaixo do NA indicativo (5%). Preventivo na floração conforme programa.',
+   at:'Crescendo. Antecipar programa fungicida.',
+   ct:'NA atingido. Fungicida sistêmico + retirar frutos afetados dos focos. (Ref. indicativa)'},
+  {id:'ph',n:'Phoma',                t:'Doença',ic:'⬛', m:'sev',
+   ok:'Severidade baixa (média <2). Evitar excesso de nitrogênio.',
+   at:'Severidade moderada (média 2–3.4). Monitorar brotações em períodos frios/úmidos.',
+   ct:'Severidade alta (média ≥3.5). Remover material afetado. Cobre preventivo. (NA não determinado)'},
+];
+
+const PRODS=[
+  {n:'Dipel WP',ia:'Bacillus thuringiensis var. kurstaki',a:'Lagarta-dos-cafezais',d:'0,5–1 kg/ha',c:'0d'},
+  {n:'Actara 250 WG',ia:'Tiametoxam',a:'Lagarta-dos-cafezais',d:'100–200 g/ha',c:'14d'},
+  {n:'Actara 250 WG',ia:'Tiametoxam',a:'Bicho-mineiro',d:'100–200 g/ha',c:'14d'},
+  {n:'Engeo Pleno S',ia:'Tiametoxam + Lambda-cialotrina',a:'Bicho-mineiro',d:'200–250 mL/ha',c:'14d'},
+  {n:'Beauveria bassiana WP',ia:'Beauveria bassiana',a:'Broca-do-café',d:'1–2 kg/ha',c:'0d'},
+  {n:'Endosulfan 350 EC',ia:'Endossulfam',a:'Broca-do-café',d:'1,5–2 L/ha',c:'21d'},
+  {n:'Vertimec 18 EC',ia:'Abamectina',a:'Ácaro-vermelho',d:'500–700 mL/ha',c:'7d'},
+  {n:'Envidor 240 SC',ia:'Espirodiclofen',a:'Ácaro-vermelho',d:'600 mL/ha',c:'14d'},
+  {n:'Confidor 700 GrDA',ia:'Imidaclopride',a:'Cochonilha',d:'400–600 g/ha',c:'21d'},
+  {n:'Movento 150 OD',ia:'Espinetoram',a:'Cochonilha',d:'250 mL/ha',c:'7d'},
+  {n:'Nemacur 400 SC',ia:'Fenamifós',a:'Nematoides',d:'6–8 L/ha',c:'60d'},
+  {n:'Vydate 400 SL',ia:'Oxamil',a:'Nematoides',d:'3–4 L/ha',c:'30d'},
+  {n:'Amistar',ia:'Azoxistrobina',a:'Ferrugem',d:'60–80 g/ha',c:'14d'},
+  {n:'Opera',ia:'Piraclostrobina + Epoxiconazol',a:'Ferrugem',d:'0,75 L/ha',c:'14d'},
+  {n:'Priori Xtra',ia:'Azoxistrobina + Ciproconazol',a:'Ferrugem',d:'300 mL/ha',c:'14d'},
+  {n:'Cercobin 700 WP',ia:'Tiofanato-metílico',a:'Cercosporiose',d:'1,2–1,5 kg/ha',c:'14d'},
+  {n:'Dithane NT',ia:'Mancozebe',a:'Cercosporiose',d:'2 kg/ha',c:'14d'},
+  {n:'Score 250 EC',ia:'Difenoconazol',a:'CBD (antracnose)',d:'400–500 mL/ha',c:'7d'},
+  {n:'Collis',ia:'Boscalida + Cresoxim-metílico',a:'CBD (antracnose)',d:'1 L/ha',c:'14d'},
+  {n:'Fungitane',ia:'Oxicloreto de cobre',a:'Phoma',d:'2–3 kg/ha',c:'7d'},
+  {n:'Calda Bordalesa',ia:'Sulfato de cobre',a:'Phoma',d:'1% v/v',c:'3d'},
+];
+
+// ── STATE ──────────────────────────────────────────────────────────────────
+let DB=lk('mipd',[]),FAZ=lk('mipd_faz',[]),TAL=lk('mipd_tal',[]),FT=[],nPl=10;
+// Stores: vals[pid][plantIdx] = number (cnt/pres/sev)
+let vals = {};
+
+function lk(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}}
+function sk(k,v){localStorage.setItem(k,JSON.stringify(v))}
+function fD(d){if(!d)return'—';const[y,m,dy]=d.split('-');return`${dy}/${m}/${y}`}
+function td(){return new Date().toISOString().slice(0,10)}
+function G(id){return document.getElementById(id)}
+function bdg(t,l){const c={ok:'bk',at:'bwa',ct:'brd',i:'bi'}[t]||'bi';return`<span class="bdg ${c}">${l}</span>`}
+function tst(m){const t=G('tst');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2600)}
+
+// ── NAV ────────────────────────────────────────────────────────────────────
+function showView(v){
+  document.querySelectorAll('.vw,#v-home').forEach(x=>x.classList.remove('on'));
+  G('v-'+v).classList.add('on');
+  // scroll to top
+  G('content').scrollTop=0;
+}
+function go(v){
+  showView(v);
+  if(v==='hist')rHist();
+  if(v==='prod')rProd();
+  if(v==='aval')sFS();
+  if(v==='cad'){rFaz();sFS();rTalCad();}
+}
+function goHome(v){ go(v); }
+function voltarHome(){ showView('home'); }
+
+// ── CADASTRO ──────────────────────────────────────────────────────────────
+function addFaz(){
+  const n=G('cfn').value.trim();
+  if(!n){tst('⚠️ Informe o nome da fazenda');return}
+  if(FAZ.find(f=>f.nome.toLowerCase()===n.toLowerCase())){tst('⚠️ Fazenda já cadastrada');return}
+  FAZ.push({id:Date.now(),nome:n,pro:G('cfp').value.trim(),mun:G('cfm').value.trim()});
+  sk('mipd_faz',FAZ);G('cfn').value='';G('cfp').value='';G('cfm').value='';
+  rFaz();sFS();tst('✅ Fazenda cadastrada!')
+}
+function delFaz(id){
+  if(!confirm('Excluir fazenda e todos os seus talhões?'))return;
+  FAZ=FAZ.filter(f=>f.id!==id);TAL=TAL.filter(t=>t.fazId!==id);
+  sk('mipd_faz',FAZ);sk('mipd_tal',TAL);rFaz();rTalCad();sFS();tst('🗑️ Fazenda excluída.')
+}
+function rFaz(){
+  const el=G('lfaz');
+  if(!FAZ.length){el.innerHTML='<div class="emp"><span class="ei">🏡</span><p>Nenhuma fazenda cadastrada.</p></div>';return}
+  el.innerHTML=FAZ.map(f=>{
+    const n=TAL.filter(t=>t.fazId===f.id).length;
+    return`<div class="ci"><div><div style="font-size:12px;font-weight:700">🏡 ${f.nome}</div><div style="font-size:10px;color:var(--t2);font-weight:500">${f.pro?f.pro+' · ':''}${f.mun?f.mun+' · ':''}<span style="color:var(--g);font-weight:700">${n} talhão${n!==1?'es':''}</span></div></div><button class="btn br2" style="padding:4px 9px;font-size:10px" onclick="delFaz(${f.id})">✕</button></div>`
+  }).join('')
+}
+function addTal(){
+  const fi=+G('ctf').value;
+  if(!fi){tst('⚠️ Selecione a fazenda');return}
+  const n=G('ctn').value.trim();
+  if(!n){tst('⚠️ Informe o nome do talhão');return}
+  if(TAL.find(t=>t.fazId===fi&&t.nome.toLowerCase()===n.toLowerCase())){tst('⚠️ Talhão já existe nesta fazenda');return}
+  TAL.push({id:Date.now(),fazId:fi,nome:n,area:G('cta').value,cult:G('ctc').value.trim(),
+            ano:G('ctano').value,esp:G('cte').value.trim(),obs:G('cto').value.trim()});
+  sk('mipd_tal',TAL);
+  ['ctn','cta','ctc','ctano','cte','cto'].forEach(x=>G(x).value='');
+  rTalCad();rFaz();tst('✅ Talhão cadastrado!')
+}
+function delTal(id){
+  if(!confirm('Excluir este talhão?'))return;
+  TAL=TAL.filter(t=>t.id!==id);sk('mipd_tal',TAL);rTalCad();rFaz();tst('🗑️ Talhão excluído.')
+}
+function rTalCad(){
+  const fi=+G('ctf').value,el=G('ltal');
+  if(!fi){el.innerHTML='<div class="emp"><span class="ei">🗺️</span><p>Selecione uma fazenda.</p></div>';return}
+  const ts=TAL.filter(t=>t.fazId===fi);
+  if(!ts.length){el.innerHTML='<div class="emp"><span class="ei">🗺️</span><p>Nenhum talhão cadastrado.</p></div>';return}
+  el.innerHTML=ts.map(t=>{
+    const inf=[t.area&&`${t.area}ha`,t.cult,t.ano&&`Plantio ${t.ano}`,t.esp].filter(Boolean).join(' · ');
+    return`<div class="ci" style="align-items:flex-start"><div style="flex:1"><div style="font-size:12px;font-weight:700">🗺️ ${t.nome}</div><div style="font-size:10px;color:var(--t2);font-weight:500">${inf}${t.obs?'<br>📝 '+t.obs:''}</div></div><button class="btn br2" style="padding:4px 9px;font-size:10px;flex-shrink:0;margin-left:7px" onclick="delTal(${t.id})">✕</button></div>`
+  }).join('')
+}
+function sFS(){
+  const cf=G('ctf'),cv=cf.value;
+  cf.innerHTML='<option value="">Selecione a fazenda...</option>'+FAZ.map(f=>`<option value="${f.id}">${f.nome}</option>`).join('');
+  if(cv)cf.value=cv;
+  const af=G('afaz'),av=af.value;
+  af.innerHTML='<option value="">Selecione a fazenda...</option>'+FAZ.map(f=>`<option value="${f.id}">${f.nome}${f.pro?' – '+f.pro:''}</option>`).join('');
+  if(av)af.value=av;
+  const pf=G('pfil'),pv=pf.value;
+  pf.innerHTML='<option value="">Todos os alvos</option>'+PRAGAS.map(p=>`<option>${p.n}</option>`).join('');
+  if(pv)pf.value=pv;
+}
+function onFaz(){
+  const fi=+G('afaz').value,s=G('atal');
+  s.innerHTML='<option value="">Selecione o talhão...</option>';
+  s.disabled=!fi;G('ati').style.display='none';
+  if(!fi)return;
+  TAL.filter(t=>t.fazId===fi).forEach(t=>{const o=document.createElement('option');o.value=t.id;o.textContent=t.nome;s.appendChild(o)})
+}
+function onTal(){
+  const id=+G('atal').value,el=G('ati'),t=TAL.find(x=>x.id===id);
+  if(!t){el.style.display='none';return}
+  const inf=[t.area&&`📐 ${t.area}ha`,t.cult&&`🌱 ${t.cult}`,t.ano&&`📅 ${t.ano}`,t.esp&&`↔️ ${t.esp}`].filter(Boolean).join('  ·  ');
+  if(inf){el.textContent=inf;el.style.display='block'}else el.style.display='none';
+}
+
+// ── AMOSTRAGEM ─────────────────────────────────────────────────────────────
+function initVals(){
+  vals={};
+  // Iniciar com 0 para que todas as plantas entrem na média automaticamente
+  PRAGAS.forEach(p=>{vals[p.id]=Array(nPl).fill(0)})
+}
+
+function bldPragas(){
+  initVals();
+  G('nplbl').textContent=`(atual: ${nPl})`;
+  const wrap=G('prg-wrap');wrap.innerHTML='';
+  PRAGAS.forEach(p=>{
+    const sec=document.createElement('div');
+    sec.className='psec';sec.id='psec-'+p.id;
+    sec.innerHTML=bldSecHTML(p);
+    wrap.appendChild(sec);
+  });
+  // Calcular resultado inicial (todos zeros → MONITORAR)
+  PRAGAS.forEach(p=>recalc(p.id));
+}
+
+function bldSecHTML(p){
+  const protoInfo = p.m==='cnt'
+    ? `📋 Protocolo: contar <strong>${p.struct}</strong> em <strong>${p.totalFixo} folhas/frutos fixos</strong> por planta`
+    : p.m==='pres'
+    ? `📋 Protocolo: registrar <strong>presença ou ausência</strong> de cochonilha por planta`
+    : `📋 Protocolo: escala de <strong>severidade visual 1–5</strong> por planta`;
+
+  let plantsHTML='';
+  for(let i=0;i<nPl;i++){
+    plantsHTML+=bldPlantRow(p,i);
+  }
+
+  return`
+    <div class="phdr" id="phdr-${p.id}" onclick="togP('${p.id}')">
+      <div class="phdr-l">
+        <span class="pic">${p.ic}</span>
+        <div><div class="pnm">${p.n}</div><div class="ptp">${p.t}${p.na?` · NA: ${p.na}%`:''}</div></div>
+      </div>
+      <span class="bdg" id="pbdg-${p.id}" style="background:var(--bg);color:var(--t3);border:1px solid var(--b)">—</span>
+    </div>
+    <div class="pbdy" id="pbdy-${p.id}">
+      <div class="proto-info">${protoInfo}</div>
+      <div class="pgrid" id="pgrid-${p.id}">${plantsHTML}</div>
+      <div class="res-box res-nd" id="pres-${p.id}">📋 Preencha os dados das plantas para ver a recomendação.</div>
+    </div>`;
+}
+
+function bldPlantRow(p, i){
+  const n=i+1;
+  if(p.m==='cnt'){
+    return`<div class="prow" id="pr-${p.id}-${i}">
+      <div class="prow-hdr">
+        <span class="plbl">Planta ${n}</span>
+        <span class="ppct" id="pct-${p.id}-${i}">0.0%</span>
+      </div>
+      <div class="cnt-row">
+        <span class="cnt-lbl">${p.struct.charAt(0).toUpperCase()+p.struct.slice(1)}<br><span style="font-weight:500;opacity:.7">de ${p.totalFixo} avaliadas</span></span>
+        <div class="cnt-ctrl">
+          <button class="cnt-btn" onclick="adj('${p.id}',${i},-1)">−</button>
+          <input type="number" class="cnt-inp" id="cv-${p.id}-${i}" value="0" min="0" max="${p.totalFixo}"
+            oninput="digitInput('${p.id}',${i},this)"
+            onblur="blurInput('${p.id}',${i},this)">
+          <button class="cnt-btn" onclick="adj('${p.id}',${i},1)">＋</button>
+        </div>
+      </div>
+    </div>`;
+  } else if(p.m==='pres'){
+    return`<div class="prow" id="pr-${p.id}-${i}">
+      <div class="prow-hdr"><span class="plbl">Planta ${n}</span></div>
+      <div class="pres-row">
+        <button class="pres-btn" id="pres-btn-${p.id}-${i}-0" onclick="setPres('${p.id}',${i},0)">✅ Ausente</button>
+        <button class="pres-btn" id="pres-btn-${p.id}-${i}-1" onclick="setPres('${p.id}',${i},1)">🚨 Presente</button>
+      </div>
+    </div>`;
+  } else { // sev
+    const labels={1:'Ausente',2:'Leve',3:'Moderado',4:'Severo',5:'M. severo'};
+    return`<div class="prow" id="pr-${p.id}-${i}">
+      <div class="prow-hdr"><span class="plbl">Planta ${n}</span><span class="ppct" id="pct-${p.id}-${i}">—</span></div>
+      <div class="sev-row">
+        ${[1,2,3,4,5].map(n=>`<button class="sev-btn" id="sev-${p.id}-${i}-${n}" onclick="setSev('${p.id}',${i},${n})">${n}<br><span style="font-size:8px">${labels[n]}</span></button>`).join('')}
+      </div>
+    </div>`;
+  }
+}
+
+// ── INTERAÇÕES ─────────────────────────────────────────────────────────────
+function adj(pid, i, delta){
+  const p=PRAGAS.find(x=>x.id===pid);
+  const inp=G(`cv-${pid}-${i}`);
+  const cur=+inp.value||0;
+  const novo=Math.max(0,Math.min(p.totalFixo, cur+delta));
+  inp.value=novo;
+  vals[pid][i]=novo;
+  const pct=(novo/p.totalFixo)*100;
+  G(`pct-${pid}-${i}`).textContent=pct.toFixed(1)+'%';
+  recalc(pid);
+}
+
+function digitInput(pid, i, inp){
+  // Enquanto digita, atualiza em tempo real mas sem forçar clamp ainda
+  const p=PRAGAS.find(x=>x.id===pid);
+  let v=parseInt(inp.value)||0;
+  if(v<0)v=0;
+  vals[pid][i]=v;
+  const pct=(Math.min(v,p.totalFixo)/p.totalFixo)*100;
+  G(`pct-${pid}-${i}`).textContent=pct.toFixed(1)+'%';
+  recalc(pid);
+}
+
+function blurInput(pid, i, inp){
+  // No blur, aplica o clamp e normaliza o campo
+  const p=PRAGAS.find(x=>x.id===pid);
+  let v=parseInt(inp.value)||0;
+  v=Math.max(0,Math.min(p.totalFixo,v));
+  inp.value=v;
+  vals[pid][i]=v;
+  const pct=(v/p.totalFixo)*100;
+  G(`pct-${pid}-${i}`).textContent=pct.toFixed(1)+'%';
+  recalc(pid);
+}
+
+function setPres(pid, i, val){
+  vals[pid][i]=val;
+  // update buttons
+  [0,1].forEach(v=>{
+    const b=G(`pres-btn-${pid}-${i}-${v}`);
+    b.className='pres-btn'+(v===0&&val===0?' on-aus':v===1&&val===1?' on-pre':'');
+  });
+  recalc(pid);
+}
+
+function setSev(pid, i, val){
+  vals[pid][i]=val;
+  const cls=['','on-ok','on-ok','on-at','on-ct','on-ct'];
+  for(let n=1;n<=5;n++){
+    const b=G(`sev-${pid}-${i}-${n}`);
+    b.className='sev-btn'+(n===val?' '+cls[n]:'');
+  }
+  const el=G(`pct-${pid}-${i}`);
+  if(el) el.textContent='Nível '+val;
+  recalc(pid);
+}
+
+function togP(id){
+  const hdr=G('phdr-'+id),bdy=G('pbdy-'+id);
+  const open=bdy.classList.toggle('open');
+  hdr.classList.toggle('open',open);
+}
+
+function recalc(pid){
+  const p=PRAGAS.find(x=>x.id===pid);
+  // Usa TODAS as plantas na média (zeros incluídos = plantas sem ocorrência)
+  const allVals=vals[pid].slice(0,nPl);
+  const nTotal=allVals.length;
+  const soma=allVals.reduce((a,b)=>a+b,0);
+  let st, mediaLabel;
+
+  if(p.m==='cnt'){
+    // Média de afetados por planta → converte para % em relação ao totalFixo
+    const mediaAfet=soma/nTotal; // média de afetados (ex: 1.4 folhas)
+    const pctMedia=(mediaAfet/p.totalFixo)*100; // % média
+    if(p.na){
+      st=pctMedia>=p.na?'ct':pctMedia>=p.na*0.7?'at':'ok';
+    } else {
+      // Lagarta: sem NA fixo — decisão por quantidade absoluta média
+      st=mediaAfet>=1?'ct':mediaAfet>=0.3?'at':'ok';
+    }
+    if(p.id==='la'){
+      mediaLabel=`Média de lagartas vivas/planta: ${mediaAfet.toFixed(2)} · ${nTotal} plantas avaliadas`;
+    } else {
+      mediaLabel=`Média: ${pctMedia.toFixed(1)}% (${mediaAfet.toFixed(2)} de ${p.totalFixo} estruturas/planta · ${nTotal} plantas)`;
+    }
+  } else if(p.m==='pres'){
+    const nPres=allVals.filter(v=>v===1).length;
+    const pctPres=(nPres/nTotal)*100;
+    st=p.na&&pctPres>=p.na?'ct':p.na&&pctPres>=p.na*0.7?'at':'ok';
+    mediaLabel=`${nPres} de ${nTotal} plantas com cochonilha (${pctPres.toFixed(0)}%)`;
+  } else { // sev
+    const mediaSev=soma/nTotal;
+    st=mediaSev>=3.5?'ct':mediaSev>=2?'at':'ok';
+    mediaLabel=`Média de severidade: ${mediaSev.toFixed(2)} · ${nTotal} plantas avaliadas`;
+  }
+
+  const icons={ok:'✅',at:'⚠️',ct:'🚨'};
+  const resEl=G('pres-'+pid);
+  resEl.className='res-box res-'+st;
+  resEl.innerHTML=`${icons[st]} ${p[st]}<div class="res-media">${mediaLabel}</div>`;
+
+  const bdgMap={ok:{bg:'var(--g3)',color:'var(--g2)',border:'1px solid var(--g)',l:'MONITORAR'},
+                at:{bg:'rgba(200,90,8,.10)',color:'var(--w)',border:'1px solid var(--w)',l:'ATENÇÃO'},
+                ct:{bg:'rgba(184,46,26,.10)',color:'var(--r)',border:'1px solid var(--r)',l:'CONTROLAR'}};
+  const b=bdgMap[st];
+  const bdgEl=G('pbdg-'+pid);
+  bdgEl.textContent=b.l;
+  bdgEl.style.cssText=`background:${b.bg};color:${b.color};border:${b.border}`;
+}
+
+function add5plantas(){
+  nPl+=5;
+  G('nplbl').textContent=`(atual: ${nPl})`;
+  PRAGAS.forEach(p=>{
+    // Extender com zeros
+    vals[p.id]=[...vals[p.id],...Array(5).fill(0)];
+    const grid=G('pgrid-'+p.id);
+    for(let i=nPl-5;i<nPl;i++){
+      const div=document.createElement('div');
+      div.innerHTML=bldPlantRow(p,i);
+      grid.appendChild(div.firstElementChild);
+    }
+    recalc(p.id);
+  });
+  tst(`✅ ${nPl} plantas na amostragem`);
+}
+
+function addF(inp){
+  Array.from(inp.files).forEach(f=>{
+    const r=new FileReader();
+    r.onload=e=>{FT.push(e.target.result);rFG()};
+    r.readAsDataURL(f);
+  });
+  inp.value='';
+}
+function rFG(){
+  G('fg').innerHTML=FT.map((s,i)=>`<div class="ft"><img src="${s}"><button class="fd" onclick="dF(${i})">✕</button></div>`).join('')
+}
+function dF(i){FT.splice(i,1);rFG()}
+
+function salvar(){
+  const fi=+G('afaz').value,ti=+G('atal').value;
+  if(!fi){tst('⚠️ Selecione a fazenda');return}
+  if(!ti){tst('⚠️ Selecione o talhão');return}
+  const fz=FAZ.find(f=>f.id===fi),tl=TAL.find(t=>t.id===ti);
+  const res=PRAGAS.map(p=>{
+    const allVals=vals[p.id].slice(0,nPl);
+    const soma=allVals.reduce((a,b)=>a+b,0);
+    const media=soma/nPl;
+    let st='ok', mediaVal=0;
+    if(p.m==='cnt'){
+      const pct=(media/p.totalFixo)*100;
+      if(p.na) st=pct>=p.na?'ct':pct>=p.na*0.7?'at':'ok';
+      else st=media>=1?'ct':media>=0.3?'at':'ok';
+      mediaVal=p.id==='la'?+media.toFixed(2):+pct.toFixed(1);
+    } else if(p.m==='pres'){
+      const pct=(allVals.filter(v=>v===1).length/nPl)*100;
+      st=p.na&&pct>=p.na?'ct':p.na&&pct>=p.na*0.7?'at':'ok';
+      mediaVal=+pct.toFixed(1);
+    } else {
+      st=media>=3.5?'ct':media>=2?'at':'ok';
+      mediaVal=+media.toFixed(2);
+    }
+    return{id:p.id,n:p.n,st,mediaVal,nPlantas:nPl};
+  });
+  DB.unshift({id:Date.now(),fazId:fi,fazNome:fz?.nome||'',talId:ti,tal:tl?.nome||'',
+    pro:fz?.pro||'',mun:fz?.mun||'',dat:G('adat').value,est:G('aest').value,
+    obs:G('aobs').value,nPlantas:nPl,fotos:[...FT],res});
+  sk('mipd',DB);
+  tst('✅ Avaliação salva com sucesso!');
+  rAval();
+  voltarHome();
+}
+
+function rAval(){
+  G('afaz').value='';G('atal').innerHTML='<option value="">Selecione o talhão...</option>';
+  G('atal').disabled=true;G('ati').style.display='none';
+  G('adat').value=td();G('aest').value='';G('aobs').value='';
+  FT=[];G('fg').innerHTML='';nPl=10;bldPragas();
+}
+
+// ── HISTÓRICO ─────────────────────────────────────────────────────────────
+function rHist(){
+  const q=(G('hbus').value||'').toLowerCase(),lista=G('hlist');
+  const fl=DB.filter(a=>(a.tal||'').toLowerCase().includes(q)||(a.pro||'').toLowerCase().includes(q)||(a.fazNome||'').toLowerCase().includes(q));
+  if(!fl.length){lista.innerHTML='<div class="emp"><span class="ei">🗂️</span><p>Sem resultados.</p></div>';return}
+  lista.innerHTML=fl.map(a=>{
+    const cr=a.res.filter(r=>r.st==='ct'),at=a.res.filter(r=>r.st==='at');
+    return`<div class="hi" onclick="aMod(${a.id})">
+      <div class="ht">
+        <div><div class="hn">${a.tal}</div>${a.fazNome?`<div style="font-size:10px;color:var(--t2);font-weight:500">🏡 ${a.fazNome}${a.pro?' · '+a.pro:''}</div>`:''}</div>
+        <div class="hd">${fD(a.dat)}</div>
+      </div>
+      <div class="tgs">
+        ${cr.map(r=>bdg('ct',r.n)).join('')}
+        ${at.map(r=>bdg('at',r.n)).join('')}
+        ${!cr.length&&!at.length?bdg('ok','✅ Sem alertas'):''}
+        ${a.fotos?.length?bdg('i','📷 '+a.fotos.length):''}
+      </div>
+    </div>`;
+  }).join('')
+}
+
+function aMod(id){
+  const a=DB.find(x=>x.id===id);if(!a)return;
+  G('mtit').textContent=`${a.tal} · ${fD(a.dat)}`;
+  const cr=a.res.filter(r=>r.st==='ct'),at=a.res.filter(r=>r.st==='at'),ok=a.res.filter(r=>r.st==='ok');
+  function sec(its,lbl,cor,bg,bd){
+    return its.length?`<div style="margin-bottom:9px">
+      <div style="font-size:10px;font-weight:700;color:${cor};margin-bottom:4px">${lbl}</div>
+      ${its.map(r=>`<div style="padding:5px 9px;background:${bg};border:1px solid ${bd};border-radius:7px;margin-bottom:3px;font-size:11px;font-weight:600;display:flex;justify-content:space-between;align-items:center">
+        <span>${PRAGAS.find(p=>p.id===r.id)?.ic||''} ${r.n}</span>
+        <span style="font-size:9.5px;opacity:.75;font-weight:500">${r.mediaVal}${r.plantasAval?` · ${r.plantasAval}pl`:''}</span>
+      </div>`).join('')}
+    </div>`:'';
+  }
+  G('mbod').innerHTML=`
+    ${a.fazNome?`<p style="font-size:11px;color:var(--t2);margin-bottom:3px;font-weight:500">🏡 ${a.fazNome}${a.mun?' · '+a.mun:''}</p>`:''}
+    ${a.pro?`<p style="font-size:11px;color:var(--t2);margin-bottom:3px;font-weight:500">👤 ${a.pro}</p>`:''}
+    ${a.est?`<p style="font-size:11px;color:var(--t2);margin-bottom:3px;font-weight:500">🌱 ${a.est}</p>`:''}
+    <p style="font-size:11px;color:var(--t2);margin-bottom:8px;font-weight:500">🌿 ${a.nPlantas} plantas amostradas</p>
+    ${sec(cr,'🚨 CONTROLE IMEDIATO','var(--r)','rgba(184,46,26,.07)','rgba(184,46,26,.2)')}
+    ${sec(at,'⚠️ ATENÇÃO','var(--w)','rgba(200,90,8,.07)','rgba(200,90,8,.2)')}
+    ${sec(ok,'✅ MONITORAR','var(--g2)','var(--g3)','rgba(74,142,42,.2)')}
+    ${a.obs?`<div class="sep"></div><p style="font-size:11px;color:var(--t2);font-weight:500">📝 ${a.obs}</p>`:''}
+    ${a.fotos?.length?`<div style="margin-top:9px"><div style="font-size:10px;font-weight:600;color:var(--t2);margin-bottom:6px">📷 Fotos</div><div class="fg">${a.fotos.map(s=>`<div class="ft"><img src="${s}"></div>`).join('')}</div></div>`:''}`;
+  G('mdel').onclick=()=>dAv(id);
+  G('mod').classList.add('on');
+}
+function fMod(){G('mod').classList.remove('on')}
+function dAv(id){
+  if(!confirm('Excluir avaliação?'))return;
+  DB=DB.filter(a=>a.id!==id);sk('mipd',DB);fMod();rHist();tst('🗑️ Excluída.')
+}
+
+// ── PRODUTOS ──────────────────────────────────────────────────────────────
+function rProd(){
+  const fil=G('pfil').value,lista=G('plist');
+  const fl=PRODS.filter(p=>!fil||p.a===fil);
+  if(!fl.length){lista.innerHTML='<div class="emp"><span class="ei">🧪</span><p>Sem resultados.</p></div>';return}
+  const g={};fl.forEach(p=>{if(!g[p.a])g[p.a]=[];g[p.a].push(p)});
+  lista.innerHTML=Object.entries(g).map(([a,ps])=>`
+    <div class="card"><div class="ct">${PRAGAS.find(x=>x.n===a)?.ic||'🧪'} ${a}</div>
+    ${ps.map(p=>`<div class="pi2"><div class="pnm2">${p.n}</div><div class="pia">I.A.: ${p.ia}</div><span class="pds">⚗️ ${p.d}</span><div class="pkr">⏱️ Carência: ${p.c}</div></div>`).join('')}
+    </div>`).join('')
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────
+window.onload=()=>{
+  G('adat').value=td();
+  bldPragas();
+  sFS();
+  rProd();
+}
+</script>
+</body>
+</html>
